@@ -3,8 +3,8 @@
 namespace Lairg\ViewComponents\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use Lairg\ViewComponents\ViewComponentsServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
@@ -29,7 +29,7 @@ class TestCase extends Orchestra
         config()->set('database.default', 'testing');
 
         /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-components_table.php.stub';
+        $migration = include __DIR__.'/../database/migrations/create_laravel-veo_table.php.stub';
         $migration->up();
         */
     }
