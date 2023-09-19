@@ -1,4 +1,4 @@
-# A collection of Laravel components built for the TALL-Stack. [WIP]
+# Laravel Veo 👀 - A collection of Laravel components built for the TALL-Stack. [WIP]
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/lairg/laravel-veo.svg?style=flat-square)](https://packagist.org/packages/lairg/laravel-veo)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/lairg/laravel-veo/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/lairg/laravel-veo/actions?query=workflow%3Arun-tests+branch%3Amain)
