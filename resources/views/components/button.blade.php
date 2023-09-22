@@ -1,55 +1,67 @@
-@props(['color' => 'primary', 'icon' => null, 'size' => null, 'spinner' => null, 'disabled' => false])
+@props([
+    'color' => 'primary',
+    'size' => null,
+    'icon' => null,
+    'spinner' => null,
+    'disabled' => false,
+    'route' => null,
+    'can' => null
+])
 
 @php
+    $baseStyle = 'group transition duration-150 inline-flex items-center justify-center border font-bold rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800';
+
     $colorStyle = match($color) {
-        'primary' => 'bg-primary-100 border hover:bg-primary-200 focus:ring-primary-500 text-primary-600',
-        'secondary' => 'bg-gray-100 hover:bg-gray-300 text-secondary-400 focus:ring-gray-300',
-        'tertiary' => 'bg-none hover:bg-secondary-50 text-secondary-300 hover:text-secondary-400 focus:ring-secondary-300',
-        'warning' => 'bg-amber-100 hover:bg-amber-200 focus:ring-amber-400 text-amber-600',
-        'danger' => 'bg-red-100 hover:bg-red-200 focus:ring-red-400 text-red-600',
-        'success' => 'bg-lime-100 hover:bg-lime-200 focus:ring-lime-400 text-lime-600',
-        'neutral' => 'bg-white hover:bg-gray-100 text-secondary-400 hover:text-secondary-500 focus:ring-gray-300',
-    };
-
-    $sizeStyle = match($size) {
-       'xl' => 'py-4 px-10 text-[1rem]',
-       'lg' => 'py-2 px-4 text-[0.95rem]',
-       'sm' => 'text-sm py-0.5 px-1.5',
-        default => 'text-sm py-1.5 px-3.5',
-    };
-
-    $iconSizeStyle = match($size) {
-        default => 'text-xs'
+        'primary' =>   'bg-red-100  border-red-100  hover:bg-red-200  text-red-800  focus:ring-red-300  dark:bg-red-800  dark:border-red-800  dark:hover:bg-red-700  dark:text-gray-100 dark:focus:ring-red-700',
+        'secondary' => 'bg-gray-200 border-gray-200 hover:bg-gray-300 text-gray-700 focus:ring-gray-400 dark:bg-gray-800 dark:border-gray-800 dark:hover:bg-gray-900 dark:text-gray-100 dark:focus:ring-gray-700',
+        'tertiary' =>  'bg-none     border-none     hover:bg-gray-200 text-gray-600 focus:ring-gray-300 dark:none        dark:border-none     dark:hover:bg-gray-900 dark:text-gray-100 dark:focus:ring-gray-600',
+        'neutral' =>   'bg-white    border-white    hover:bg-gray-100 text-gray-600 focus:ring-gray-300 dark:bg-gray-900 dark:border-gray-900 dark:hover:bg-gray-900 dark:text-gray-100 dark:focus:ring-gray-600',
     };
 
     $iconColorStyle = match($color) {
-        'primary' => 'text-primary-400',
-        'secondary' => 'text-secondary-300',
-        'tertiary' => 'text-secondary-200',
-        'warning' => 'bg-amber-100 hover:bg-amber-200 focus:ring-amber-400 text-amber-600',
-        'danger' => 'bg-red-100 hover:bg-red-200 focus:ring-red-400 text-red-600',
-        'success' => 'bg-lime-100 hover:bg-lime-200 focus:ring-lime-400 text-lime-600',
-        'neutral' => 'text-secondary-300',
+        'primary' =>               'text-red-300  group-hover:text-red-400',
+        'secondary', 'tertiary' => 'text-gray-400 group-hover:text-gray-500',
+        'neutral' =>               'text-gray-400 group-hover:text-gray-400',
+    };
+
+    $sizeStyle = match($size) {
+        'lg' => 'py-2 px-6 text-lg',
+        'sm' => 'py-0.5 px-3 text-sm',
+        default => 'py-1.5 px-4'
+    };
+
+    $iconSizeStyle = match($size) {
+        'lg' => 'text-xs mr-2.5',
+        'sm' => 'text-2xs mr-1',
+        default => 'text-2xs mr-1.5'
     };
 
     $disabledStyle = match($disabled) {
-        true => 'opacity-60 cursor-not-allowed',
+        true => 'bg-opacity-30 cursor-not-allowed',
         default => ''
     };
 
     $spinnerColor = match($color) {
-        'secondary', 'tertiary' => 'dark',
-        default => 'light'
+        'primary' => 'text-red-400',
+        default => 'text-gray-400'
     };
 
 @endphp
 
-<button wire:loading.attr="disabled" {{ $attributes->merge(['type' => 'submit', 'class' => "inline-flex items-center justify-center border border-transparent whitespace-nowrap font-bold rounded focus:outline-none focus:ring-2 focus:ring-offset-2 {$colorStyle} {$sizeStyle} {$disabledStyle}"]) }} @if($disabled) disabled @endif>
-    @if($icon)
-        <i class="fa-solid fa-{{ $icon }} mr-1.5 {{ $iconSizeStyle }} {{ $iconColorStyle }}"></i>
-    @endif
+@if(! $can || auth()->user()->can(... $can))
+    <button @if($route) onclick="window.location.href='{{ $route }}';" @endif wire:loading.attr="disabled" {{ $attributes->merge(['class' => "{$baseStyle} {$colorStyle} {$sizeStyle} {$disabledStyle}"]) }} @if($disabled) disabled @endif>
+        @if($icon)
+            <i class="fa-solid fa-fw fa-{{ $icon }} {{ $iconColorStyle }} {{ $iconSizeStyle }}"></i>
+        @endif
 
-    <span>
         {{ $slot }}
-    </span>
-</button>
+
+        @if($spinner)
+            {{ $spinner }}
+        @else
+            @if($attributes->has('wire:click'))
+                <x-spinner wire:target="{{ $attributes->get('wire:click') }}" :color="$spinnerColor" class="ml-2"/>
+            @endif
+        @endif
+    </button>
+@endif
