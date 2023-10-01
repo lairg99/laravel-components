@@ -8,7 +8,8 @@
     'key' => null,
     'value' => null,
     'measure' => null,
-    'clearable' => false
+    'clearable' => false,
+    'hint' => null,
 ])
 
 @php
@@ -36,18 +37,36 @@
     @endif
 
     <div class="flex items-center">
-        <div class="relative flex-1" x-data>
-            <input x-ref="input" type="{{ $type }}" {{ $attributes->except('class')->merge(['class' => "{$base} {$border} {$inputClass}"]) }} id="{{ $key }}" {{ $disabled ? 'disabled' : '' }}/>
+        @php
+            $definition = "''";
 
-            @if($clearable)
-                @php
-                    $action = $attributes->get('wire:model')
-                        ? "\$refs.input.value = null && \$wire.set('{$attributes->get('wire:model')}', null)"
-                        : '$refs.input.value = null';
-                @endphp
+            if($wire = $attributes->get('wire:model')) {
+                $definition = "window.Livewire.find('{$this->id}').entangle('{$wire}')";
+            }
 
-                <i x-show="$refs.input.value.length > 0" class="fa-solid fa-xmark absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 cursor-pointer" x-on:click="{{ $action }}"></i>
-            @endif
+            if($wire = $attributes->get('wire:model.defer')) {
+                $definition = "window.Livewire.find('{$this->id}').entangle('{$wire}').defer";
+            }
+        @endphp
+
+        <div class="relative flex-1" x-data="{ input: {{ $definition }} }">
+            <input x-model="input" x-ref="input" type="{{ $type }}" {{ $attributes->except(['class', 'wire:model'])->merge(['class' => "{$base} {$border} {$inputClass}"]) }} id="{{ $key }}" {{ $disabled ? 'disabled' : '' }}/>
+
+            <div class="flex items-center gap-x-3 absolute right-4 top-0 bottom-0" x-cloak>
+                @if($maxLength = $attributes->get('maxlength'))
+                    <div x-show="input.length" class="font-bold text-sm" x-bind:class="{
+                        'text-gray-400': input.length < {{ $maxLength - 1 }},
+                        'text-amber-600': input.length === {{ $maxLength - 1 }},
+                        'text-red-700': input.length === {{ $maxLength}}
+                    }">
+                        <span x-text="input.length"></span>/{{ $maxLength }}
+                    </div>
+                @endif
+
+                @if($clearable)
+                    <i x-on:click="input = ''; $focus.focus($refs.input)" class="fa-solid fa-xmark text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 cursor-pointer"></i>
+                @endif
+            </div>
         </div>
 
         @if($measure)
