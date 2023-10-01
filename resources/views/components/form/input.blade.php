@@ -9,6 +9,7 @@
     'value' => null,
     'measure' => null,
     'clearable' => false,
+    'withSpinner' => false,
     'hint' => null,
 ])
 
@@ -40,21 +41,23 @@
         @php
             $definition = "''";
 
-            if($wire = $attributes->get('wire:model')) {
+            $wire = $attributes->get('wire:model') ?? $attributes->get('wire:model.defer');
+
+            if($attributes->get('wire:model')) {
                 $definition = "window.Livewire.find('{$this->id}').entangle('{$wire}')";
             }
 
-            if($wire = $attributes->get('wire:model.defer')) {
+            if($attributes->get('wire:model.defer')) {
                 $definition = "window.Livewire.find('{$this->id}').entangle('{$wire}').defer";
             }
         @endphp
 
         <div class="relative flex-1" x-data="{ input: {{ $definition }} }">
-            <input x-model="input" x-ref="input" type="{{ $type }}" {{ $attributes->except(['class', 'wire:model'])->merge(['class' => "{$base} {$border} {$inputClass}"]) }} id="{{ $key }}" {{ $disabled ? 'disabled' : '' }}/>
+            <input x-model="input" x-ref="input" type="{{ $type }}" {{ $attributes->except(['class'])->merge(['class' => "{$base} {$border} {$inputClass}"]) }} id="{{ $key }}" {{ $disabled ? 'disabled' : '' }}/>
 
-            <div class="flex items-center gap-x-3 absolute right-4 top-0 bottom-0" x-cloak>
+            <div class="flex items-center gap-x-3 absolute right-4 top-0 bottom-0">
                 @if($maxLength = $attributes->get('maxlength'))
-                    <div x-show="input.length" class="font-bold text-sm" x-bind:class="{
+                    <div x-cloak x-show="input.length" class="font-bold text-sm" x-bind:class="{
                         'text-gray-400': input.length < {{ $maxLength - 1 }},
                         'text-amber-600': input.length === {{ $maxLength - 1 }},
                         'text-red-700': input.length === {{ $maxLength}}
@@ -65,6 +68,10 @@
 
                 @if($clearable)
                     <i x-on:click="input = ''; $focus.focus($refs.input)" class="fa-solid fa-xmark text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 cursor-pointer"></i>
+                @endif
+
+                @if($withSpinner)
+                    <i class="fa-solid fa-spinner text-sm text-gray-400 animate-spin" @if($wire) wire:loading.delay.shorter wire:target="{{ $wire }}" @endif></i>
                 @endif
             </div>
         </div>

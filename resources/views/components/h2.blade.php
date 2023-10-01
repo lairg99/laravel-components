@@ -15,7 +15,7 @@
         <div @class(['flex flex-col sm:items-center sm:flex-row gap-x-3 gap-y-2 mt-3 md:mt-0 sm:pl-5 md:ml-5 sm:ml-auto', 'md:border-l dark:border-gray-700' => $actions !== null])>
             @if($withSearch)
                 <div>
-                    <x-veo::search input-class="py-1.5" wire:model="search"/>
+                    <x-veo::form.input wire:model="search" class="py-1.5" with-spinner/>
                 </div>
             @endif
 
