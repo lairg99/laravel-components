@@ -60,7 +60,7 @@
             {{ $spinner }}
         @else
             @if($attributes->has('wire:click'))
-                <x-spinner wire:target="{{ $attributes->get('wire:click') }}" :color="$spinnerColor" class="ml-2"/>
+                <x-veo::spinner wire:target="{{ $attributes->get('wire:click') }}" :color="$spinnerColor" class="ml-2"/>
             @endif
         @endif
     </button>
