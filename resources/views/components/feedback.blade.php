@@ -34,9 +34,9 @@
     };
 @endphp
 
-<div {{ $attributes->merge(['class' => "rounded-md {$color} {$size} flex items-center"]) }}>
+<div {{ $attributes->merge(['class' => "rounded-md {$color} {$size} flex items-start"]) }}>
     @if($icon !== 'none')
-        <i class="fa-solid inline-block fa-{{ $icon }} {{ $iconColor }} {{ $iconSize }}"></i>
+        <i class="fa-solid inline-block fa-{{ $icon }} mt-1 {{ $iconColor }} {{ $iconSize }}"></i>
     @endif
 
     <div class="">
