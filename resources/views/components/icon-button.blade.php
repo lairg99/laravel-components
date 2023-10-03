@@ -18,7 +18,7 @@
 @endphp
 
 <button type="{{ $type }}" {{ $attributes->merge(['class' => "{$baseStyle} {$sizeStyle} {$colorStyle}"]) }}>
-    <i @if($wire) wire:loading.remove wire:target="{{ $wire }}" @endif class="fa-solid fa-fw fa-{{ $icon }}"></i>
+    <i @if($wire) wire:loading.remove wire:target="{{ $wire }}" @endif class="fa-regular fa-fw fa-{{ $icon }}"></i>
 
     @if($wire)
         <i wire:loading wire:target="{{ $wire }}" class="fa-solid fa-fw fa-spinner animate-spin"></i>
