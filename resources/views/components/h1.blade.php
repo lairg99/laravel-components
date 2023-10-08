@@ -1,31 +1,5 @@
 @props(['actions' => null, 'badges' => null, 'withSearch' => false, 'filters' => null])
 
-@if(method_exists($this, 'breadcrumb'))
-    @php
-        $path = $this->breadcrumb();
-    @endphp
-
-    <div class="flex items-center gap-x-3 text-xs my-2">
-        <a href="{{ route('dashboard') }}" class="font-bold text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400">
-            {{ config('app.name') }}
-        </a>
-
-        @foreach($path as $i => $path)
-            <i class="fa-solid fa-chevron-right text-[0.6rem] text-gray-400 dark:text-gray-600"></i>
-
-            @php $url = Arr::get($path, 1); @endphp
-
-            <a @if($url) href="{{ $url }}" @endif @class([
-                'font-bold',
-                'text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400' => ($i + 1) !== count($path),
-                'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300' => ($i + 1) === count($path),
-            ])>
-                {{ $path[0] }}
-            </a>
-        @endforeach
-    </div>
-@endif
-
 <div {{ $attributes->class(['flex w-full md:items-center flex-col md:flex-row my-8']) }}>
     <div class="flex flex-col lg:flex-row lg:items-center">
         <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-200">
