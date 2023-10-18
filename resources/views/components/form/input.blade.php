@@ -45,10 +45,10 @@
         @endphp
 
         <div class="relative flex-1" x-data="{
-            input: $refs.input.value,
-            get length() { return this.input.length; }
+            content: $refs.native.value,
+            get length() { return this.content.length; }
         }">
-            <input x-ref="input" x-on:keyup="input = $refs.input.value" type="{{ $type }}" {{ $attributes->except(['class'])->merge(['class' => "{$base} {$border} {$inputClass}"]) }} id="{{ $key }}" {{ $disabled ? 'disabled' : '' }}/>
+            <input x-ref="native" x-on:keyup="alert('hello')" type="{{ $type }}" {{ $attributes->except(['class'])->merge(['class' => "{$base} {$border} {$inputClass}"]) }} id="{{ $key }}" {{ $disabled ? 'disabled' : '' }}/>
 
             <div class="flex items-center gap-x-3 absolute right-4 top-0 bottom-0">
                 @if($maxLength = $attributes->get('maxlength'))
@@ -64,8 +64,8 @@
                 @if($clearable)
                     @php
                         $clearAction = $wire
-                            ? "input = ''; \$refs.input = ''; \$wire.set('{$wire}', ''); \$focus.focus(\$refs.input)"
-                            : "input = ''; \$refs.input = ''; \$focus.focus(\$refs.input)"
+                            ? "content = ''; \$refs.native = ''; \$wire.set('{$wire}', ''); \$focus.focus(\$refs.native)"
+                            : "content = ''; \$refs.native = ''; \$focus.focus(\$refs.native)"
                     @endphp
 
                     <i x-on:click="{{ $clearAction }}" class="fa-solid fa-xmark text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 cursor-pointer"></i>
