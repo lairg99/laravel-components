@@ -48,7 +48,7 @@
             content: $refs.native.value,
             get length() { return this.content.length; }
         }">
-            <input x-ref="native" x-on:keyup="alert('hello')" type="{{ $type }}" {{ $attributes->except(['class'])->merge(['class' => "{$base} {$border} {$inputClass}"]) }} id="{{ $key }}" {{ $disabled ? 'disabled' : '' }}/>
+            <input x-ref="native" x-on:keyup="input = $refs.input.value" type="{{ $type }}" {{ $attributes->except(['class'])->merge(['class' => "{$base} {$border} {$inputClass}"]) }} id="{{ $key }}" {{ $disabled ? 'disabled' : '' }}/>
 
             <div class="flex items-center gap-x-3 absolute right-4 top-0 bottom-0">
                 @if($maxLength = $attributes->get('maxlength'))
