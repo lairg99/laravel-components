@@ -19,7 +19,7 @@
 
     $size = match($size) {
         'sm' => 'py-2 px-4 my-4 text-sm',
-        default => 'py-3 px-5 my-4'
+        default => 'py-3 px-5'
     };
 
     $iconSize = match($size) {
