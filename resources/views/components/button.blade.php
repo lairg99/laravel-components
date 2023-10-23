@@ -5,7 +5,8 @@
     'spinner' => null,
     'disabled' => false,
     'route' => null,
-    'can' => null
+    'can' => null,
+    'type' => 'button'
 ])
 
 @php
@@ -49,7 +50,7 @@
 @endphp
 
 @if(! $can || auth()->user()->can(... $can))
-    <button @if($route) onclick="window.location.href='{{ $route }}';" @endif wire:loading.attr="disabled" {{ $attributes->merge(['class' => "{$baseStyle} {$colorStyle} {$sizeStyle} {$disabledStyle}"]) }} @if($disabled) disabled @endif>
+    <button type="{{ $type }}" @if($route) onclick="window.location.href='{{ $route }}';" @endif wire:loading.attr="disabled" {{ $attributes->merge(['class' => "{$baseStyle} {$colorStyle} {$sizeStyle} {$disabledStyle}"]) }} @if($disabled) disabled @endif>
         @if($icon)
             <i class="fa-solid fa-fw fa-{{ $icon }} {{ $iconColorStyle }} {{ $iconSizeStyle }}"></i>
         @endif
