@@ -1,7 +1,7 @@
 <label {{ $attributes->except(['wire:model', 'value'])->merge(['class' => 'flex items-start w-full']) }}>
 
     @if($slot->isNotEmpty())
-        <div class="text-gray-600 dark:text-gray-300">
+        <div class="text-gray-600 dark:text-gray-300 pr-6">
             {{ $slot }}
         </div>
     @endif
