@@ -1,6 +1,6 @@
 @props(['actions' => null, 'withSearch' => false, 'filters' => null])
 
-<div {{ $attributes->class(['flex w-full md:items-center flex-col md:flex-row mt-7 mb-5']) }}>
+<div {{ $attributes->class(['flex w-full md:items-center flex-col md:flex-row mt-5 sm:mt-7 mb-4 sm:mb-5']) }}>
     <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">
         {{ $slot }}
     </h2>

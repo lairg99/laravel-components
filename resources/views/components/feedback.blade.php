@@ -18,8 +18,8 @@
     };
 
     $size = match($size) {
-        'sm' => 'py-2 px-4 my-4 text-sm',
-        default => 'py-3 px-5'
+        'sm' => 'py-2 px-4 my-4 text-sm mb-5',
+        default => 'py-3 px-5 mb-6'
     };
 
     $iconSize = match($size) {
