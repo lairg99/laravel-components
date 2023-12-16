@@ -9,7 +9,7 @@
 
     $colorStyle = match(true) {
         $hasHighlight => 'text-amber-700',
-        $hasError => 'text-red-700',
+        $hasError => 'text-red-700 dark:text-red-500',
         default => 'text-gray-700 dark:text-gray-300',
     };
 
@@ -19,7 +19,7 @@
     {{ $value ?? $slot }}
 
     @if($hasError)
-        <i class="fa-solid fa-triangle-exclamation text-xs ml-1 text-red-700"></i>
+        <i class="fa-solid fa-triangle-exclamation text-xs ml-1 text-red-700 dark:text-red-500"></i>
     @endif
 
     @if($optional)
