@@ -34,12 +34,14 @@
     };
 @endphp
 
-<div {{ $attributes->merge(['class' => "rounded-md border {$color} {$size} flex items-start"]) }}>
-    @if($icon !== 'none')
-        <i class="fa-solid inline-block fa-{{ $icon }} mt-1 {{ $iconColor }} {{ $iconSize }}"></i>
-    @endif
+<div {{ $attributes->merge(['class' => "rounded-md border {$color} {$size}"]) }}>
+    <div class="flex items-start">
+        @if($icon !== 'none')
+            <i class="fa-solid inline-block fa-{{ $icon }} mt-1 {{ $iconColor }} {{ $iconSize }}"></i>
+        @endif
 
-    <div class="">
-        {{ $slot }}
+        <div class="">
+            {{ $slot }}
+        </div>
     </div>
 </div>
