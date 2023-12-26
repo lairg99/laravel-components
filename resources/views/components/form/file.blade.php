@@ -7,7 +7,7 @@
     'key' => null,
     'multiple' => false,
     'fileName' => 'Datei',
-    'isLoading' => true
+    'isLoading' => false
 ])
 
 @php
