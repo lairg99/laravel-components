@@ -12,14 +12,14 @@
         @endif
     </div>
 
-    <div class="md:ml-auto flex flex-row items-center flex-wrap gap-x-3 gap-y-2 mt-2 sm:mt-0 md:mr-5">
+    <div class="md:ml-auto flex flex-row items-center flex-wrap gap-x-3 gap-y-2 mt-2 sm:mt-0">
         @if($actions)
             {{ $actions }}
         @endif
     </div>
 
     @if($withSearch || $filters)
-        <div @class(['flex items-center flex-row gap-x-3 gap-y-2 mt-3 md:mt-0 md:pl-5 md:ml-5', 'md:border-l dark:border-gray-700' => $actions !== null])>
+        <div @class(['flex items-center flex-row gap-x-3 gap-y-2 mt-3 md:mt-0 md:pl-5 md:ml-5 ml-0 md:ml-5', 'md:border-l dark:border-gray-700' => $actions !== null])>
             @if($withSearch)
                 <div class="-my-4 flex-1">
                     <x-veo::form.input wire:model="search" class="py-1.5" placeholder="Suchen ..." with-spinner/>
