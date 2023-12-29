@@ -12,11 +12,11 @@
         @endif
     </div>
 
-    <div class="sm:ml-auto flex flex-row items-center flex-wrap gap-x-3 gap-y-2 mt-2 sm:mt-0">
-        @if($actions)
+    @if($actions)
+        <div class="sm:ml-auto flex flex-row items-center flex-wrap gap-x-3 gap-y-2 mt-2 sm:mt-0">
             {{ $actions }}
-        @endif
-    </div>
+        </div>
+    @endif
 
     @if($withSearch || $filters)
         <div @class(['flex items-center flex-row gap-x-3 gap-y-2 mt-3 md:mt-0 md:pl-5 md:ml-5', 'md:border-l dark:border-gray-700' => $actions !== null])>

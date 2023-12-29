@@ -5,11 +5,11 @@
         {{ $slot }}
     </h3>
 
-    <div class="sm:ml-auto flex flex-row items-center flex-wrap gap-x-3 gap-y-2 mt-2 sm:mt-0">
-        @if($actions)
+    @if($actions)
+        <div class="sm:ml-auto flex flex-row items-center flex-wrap gap-x-3 gap-y-2 mt-2 sm:mt-0">
             {{ $actions }}
-        @endif
-    </div>
+        </div>
+    @endif
 
     @if($withSearch || $filters)
         <div @class(['flex flex-col sm:flex-row gap-x-3 gap-y-2 mt-3 md:mt-0 sm:pl-5 md:ml-5 sm:ml-auto', 'md:border-l dark:border-gray-700' => $actions !== null])>

@@ -15,7 +15,7 @@
     $colorStyle = match($color) {
         'primary' =>   'bg-primary-100  border-primary-100  hover:bg-primary-200  text-primary-700  focus:ring-primary-300 active:ring-primary-300  dark:bg-primary-800  dark:border-primary-800  dark:hover:bg-primary-700  dark:text-gray-100 dark:focus:ring-primary-700 dark:active:ring-primary-700',
         'secondary' => 'bg-gray-200     border-gray-200     hover:bg-gray-300     text-gray-700     focus:ring-gray-400    active:ring-gray-400     dark:bg-gray-800     dark:border-gray-800     dark:hover:bg-gray-900     dark:text-gray-100 dark:focus:ring-gray-700    dark:active:ring-gray-700',
-        'tertiary' =>  'bg-none         border-none         hover:bg-gray-200     text-gray-500     focus:ring-gray-300    active:ring-gray-300     dark:none            dark:border-none         dark:hover:bg-gray-900     dark:text-gray-400 dark:focus:ring-gray-600    dark:active:ring-gray-600',
+        'tertiary' =>  'bg-none         border-gray-300     hover:bg-gray-200     text-gray-700     focus:ring-gray-300    active:ring-gray-300     dark:none            dark:border-gray-700     dark:hover:bg-gray-900     dark:text-gray-100 dark:focus:ring-gray-600    dark:active:ring-gray-600',
         'neutral' =>   'bg-white        border-white        hover:bg-gray-100     text-gray-600     focus:ring-gray-300    active:ring-gray-300     dark:bg-gray-900     dark:border-gray-900     dark:hover:bg-gray-900     dark:text-gray-100 dark:focus:ring-gray-600    dark:active:ring-gray-600',
     };
 
