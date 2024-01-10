@@ -83,4 +83,8 @@
             </div>
         @endif
     </div>
+
+    @if($hint)
+        <x-veo::form.hint>{{ $hint }}</x-veo::form.hint>
+    @endif
 </div>
