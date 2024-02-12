@@ -43,7 +43,7 @@
             $wire = $attributes->get('wire:model') ?? $attributes->get('wire:model.defer');
             $keyUpEvent = $attributes->has('x-on:keyup')
                 ? 'content = $refs.native.value && ' . $attributes->get('x-on:keyup')
-                : 'content = $refs.native.value && ';
+                : 'content = $refs.native.value';
 
         @endphp
 
