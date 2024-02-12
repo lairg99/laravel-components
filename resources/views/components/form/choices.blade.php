@@ -10,12 +10,12 @@
 
 @php
 
-    $key = $attributes->get('wire:model') ?? \Illuminate\Support\Str::random();
+    $key = $attributes->only(['wire:model', 'wire:model.defer', 'wire:model.live'])->first() ?? \Illuminate\Support\Str::random();
     $error = \Illuminate\Support\Arr::first($errors->get($key) ?? []);
 
     /** @var \Illuminate\View\ComponentAttributeBag $attributes */
     $wireMethod = $attributes->get('wire:options');
-    $wireProperty = $attributes->get('wire:model');
+    $wireProperty = $attributes->only(['wire:model', 'wire:model.defer', 'wire:model.live'])->first();
 
     if (! $wireMethod) {
         throw new InvalidArgumentException("You have to provide wire:options as ['key' => 'value', ...] to use choices.");
@@ -41,7 +41,7 @@
                 debounce: null,
                 initalOptions: [],
 
-                value: @if($attributes->has('wire:model')) @entangle($attributes->get('wire:model')) @else null @endif,
+                value: @if($attributes->has('wire:model')) @entangle($attributes->only(['wire:model', 'wire:model.defer', 'wire:model.live'])->first()) @else null @endif,
 
                 async init() {
                     this.choices = new Choices($refs.choice, {

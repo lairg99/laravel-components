@@ -12,7 +12,7 @@
 
 @php
 
-    $key = $key ?? $attributes->get('wire:model') ?? Str::random();
+    $key = $key ?? $attributes->only(['wire:model', 'wire:model.defer', 'wire:model.live'])->first() ?? Str::random();
     $error = Arr::first($errors->get($key) ?? []);
 
     $border = match(true) {
@@ -29,7 +29,7 @@
     @endif
 
     <div x-on:livewire-upload-start="isUploading = true" x-on:livewire-upload-finish="isUploading = false" x-on:livewire-upload-error="isUploading = false" x-on:livewire-upload-progress="progress = $event.detail.progress" x-data="{ files: null, isUploading: false, progress: 0 }" {{ $attributes->merge(['class' => "overflow-hidden w-full cursor-pointer rounded-lg dark:bg-gray-800 shadow-sm border {$border}"]) }}>
-        <label class="w-full flex items-center p-2" for="{{ $key }}"> <input type="file" @if($attributes->has('wire:model')) wire:model="{{ $attributes->get('wire:model') }}" @endif class="sr-only" id="{{ $key }}" {{ $multiple ? 'multiple' : '' }} x-on:change="files = Object.values($event.target.files)">
+        <label class="w-full flex items-center p-2" for="{{ $key }}"> <input type="file" @if($attributes->has('wire:model')) wire:model="{{ $attributes->only(['wire:model', 'wire:model.defer', 'wire:model.live'])->first() }}" @endif class="sr-only" id="{{ $key }}" {{ $multiple ? 'multiple' : '' }} x-on:change="files = Object.values($event.target.files)">
             <div class="pl-4" x-html="files ? files.map(file => '<div class=\'my-1\'>' + file.name + '</div>').join('') : '{{$fileName}} auswählen...'"></div>
 
             @if($isLoading)

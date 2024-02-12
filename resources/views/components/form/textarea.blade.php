@@ -7,7 +7,7 @@
 
 @php
 
-    $key = $key ?? $attributes->get('wire:model') ?? \Illuminate\Support\Str::random();
+    $key = $key ?? $attributes->only(['wire:model', 'wire:model.defer', 'wire:model.live'])->first() ?? \Illuminate\Support\Str::random();
     $error = \Illuminate\Support\Arr::first($errors->get($key) ?? []);
 
     $base = 'block dark:bg-gray-800 w-full rounded-md shadow-sm focus:ring focus:ring-opacity-50';

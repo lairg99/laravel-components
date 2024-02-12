@@ -15,7 +15,7 @@
 
 @php
 
-    $key = $key ?? $attributes->get('wire:model') ?? \Illuminate\Support\Str::random();
+    $key = $key ?? $attributes->only(['wire:model', 'wire:model.defer', 'wire:model.live'])->first() ?? \Illuminate\Support\Str::random();
     $error = \Illuminate\Support\Arr::first($errors->get($key) ?? []);
 
     $base = 'block dark:bg-gray-800 w-full rounded-md shadow-sm focus:ring focus:ring-opacity-50';
@@ -40,7 +40,7 @@
     <div class="flex items-center">
         @php
 
-            $wire = $attributes->get('wire:model') ?? $attributes->get('wire:model.defer');
+            $wire = $attributes->only(['wire:model', 'wire:model.defer', 'wire:model.live'])->first() ?? $attributes->get('wire:model.defer');
             $keyUpEvent = $attributes->has('x-on:keyup')
                 ? 'content = $refs.native.value && ' . $attributes->get('x-on:keyup')
                 : 'content = $refs.native.value';

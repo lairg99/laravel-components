@@ -1,7 +1,7 @@
 @props(['title'])
 
 @php
-    $wire = $attributes->get('wire:model');
+    $wire = $attributes->only(['wire:model', 'wire:model.defer', 'wire:model.live'])->first();
 @endphp
 
 <label {{ $attributes->except('value') }}>
