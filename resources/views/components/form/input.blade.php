@@ -41,6 +41,9 @@
         @php
 
             $wire = $attributes->get('wire:model') ?? $attributes->get('wire:model.defer');
+            $keyUpEvent = $attributes->has('x-on:keyup')
+                ? 'content = $refs.native.value && ' . $attributes->get('x-on:keyup')
+                : 'content = $refs.native.value && ';
 
         @endphp
 
@@ -48,7 +51,7 @@
             content: $refs.native.value,
             get length() { return this.content.length; }
         }">
-            <input x-ref="native" x-on:keyup="content = $refs.native.value" type="{{ $type }}" {{ $attributes->except(['class'])->merge(['class' => "{$base} {$border} {$inputClass}"]) }}  {{ $disabled ? 'disabled' : '' }}/>
+            <input x-ref="native" x-on:keyup="{{ $keyUpEvent}}" type="{{ $type }}" {{ $attributes->except(['class', 'x-on:keyup'])->merge(['class' => "{$base} {$border} {$inputClass}"]) }}  {{ $disabled ? 'disabled' : '' }}/>
 
             <div class="flex items-center gap-x-3 absolute right-4 top-0 bottom-0">
                 @if($maxLength = $attributes->get('maxlength'))

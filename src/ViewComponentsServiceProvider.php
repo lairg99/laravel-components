@@ -3,6 +3,7 @@
 namespace Lairg\ViewComponents;
 
 use Illuminate\Support\Facades\Blade;
+use Lairg\ViewComponents\Livewire\DatePicker;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
